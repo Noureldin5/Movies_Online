@@ -2,6 +2,7 @@ package org.example.midterm.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Type {
 
     @Id
@@ -16,6 +18,11 @@ public class Type {
     private Long id;
 
     private String name;
+
     @OneToMany()
     private List<Movie> movieTypes;
+
+    public Type(String name) {
+        this.name = name;
+    }
 }
