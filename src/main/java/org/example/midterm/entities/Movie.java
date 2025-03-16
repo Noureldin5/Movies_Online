@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 
@@ -15,16 +16,18 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @NotBlank(message = "Title is mandatory")
     private String title;
+    @NotBlank(message = "Author name is mandatory")
     private String author_full_name;
+    @NotBlank(message = "Transcript is mandatory")
     private String transcript;
-    private LocalDateTime created_at;
+    private int created_at;
     private Integer price;
     private Integer ageAccess;
     private Boolean exist = true;
 
-    public Movie(String title, String transcript, LocalDateTime created_at, Type type) {
+    public Movie(String title, String transcript, int created_at, Type type) {
         this.title = title;
         this.transcript = transcript;
         this.created_at = created_at;

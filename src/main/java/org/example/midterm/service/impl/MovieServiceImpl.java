@@ -1,5 +1,6 @@
 package org.example.midterm.service.impl;
 
+import jakarta.validation.Valid;
 import org.example.midterm.dto.movie.MovieAddRequest;
 import org.example.midterm.dto.movie.MovieResponse;
 import org.example.midterm.entities.Customer;
@@ -15,9 +16,9 @@ import org.example.midterm.service.MovieService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,8 @@ public class MovieServiceImpl implements MovieService {
     private final UserRepository userRepository;
 
     @Override
-    public void addMovie(MovieAddRequest request) {
+    @Transactional
+    public void addMovie(@Valid MovieAddRequest request) {
         if (movieRepository.findByTranscript(request.getTranscript()).isPresent())
             throw new NotFoundException("movie with this transcript is already exist!: "+request.getTranscript(),
                     HttpStatus.BAD_REQUEST);
@@ -42,7 +44,7 @@ public class MovieServiceImpl implements MovieService {
         movie.setAgeAccess(request.getAge_access());
         movie.setAuthor_full_name(request.getAuthor_full_name());
         movie.setTranscript(request.getTranscript());
-        movie.setCreated_at(LocalDateTime.now());
+        movie.setCreated_at(request.getCreated_at());
         movie.setExist(true);
         Optional<Type> type = typeRepository.findByName(request.getType());
         if (type.isEmpty())
