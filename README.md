@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Movie Management System is a Spring Boot application that allows users to manage movies, including adding, buying, and retrieving movie details. The application uses Hibernate Validator for data validation and integrates with a MySQL database.
+The Movie Management System is a Spring Boot application that allows users to manage movies, including adding, buying, and retrieving movie details. The application uses Hibernate Validator for data validation and integrates with a Postgres database.
 
 ## Features
 
