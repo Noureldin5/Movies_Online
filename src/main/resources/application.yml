@@ -27,7 +27,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/moviesdb
     driver-class-name: org.postgresql.Driver
     username: postgres
-    password: Nour@1205
+    password: 1234
   jpa:
     hibernate:
       ddl-auto: update

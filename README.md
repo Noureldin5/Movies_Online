@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Movie Management System is a Spring Boot application that allows users to manage movies, including adding, buying, and retrieving movie details. The application uses Hibernate Validator for data validation and integrates with a MySQL database.
+The Movie Management System is a Spring Boot application that allows users to manage movies, including adding, buying, and retrieving movie details. The application uses Hibernate Validator for data validation and integrates with a PostgreSQL database.
 
 ## Features
 
@@ -17,15 +17,17 @@ The Movie Management System is a Spring Boot application that allows users to ma
 - Spring Boot
 - Hibernate Validator
 - Maven
-- MySQL
+- PostgreSQL
+- H2 Database (for development)
 - JUnit 5
 - Mockito
+- Swagger/OpenAPI
 
 ## Prerequisites
 
-- Java 17 or higher
+- Java 23 or higher
 - Maven 3.6.0 or higher
-- MySQL 8.0 or higher
+- PostgreSQL 13 or higher
 
 ## Getting Started
 
@@ -38,6 +40,25 @@ cd movie-management-system
 ```bash
 mvn clean install
 mvn spring-boot:run
+```
+```
+Configure the Database
+Development Profile (H2 Database)
+The application is configured to use an in-memory H2 database for the development profile. No additional setup is required.
+
+
+Production Profile (PostgreSQL)
+Create a PostgreSQL database named moviesdb and update the application.yml file with your database credentials.
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/moviesdb
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
 ```
 ```
 API Endpoints
