@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MovieAddRequest {
-    private String name;
+    private String title;
     private String author_full_name;
     private String transcript;
     private Integer price;

@@ -15,6 +15,7 @@ public class Customer {
     private Long id;
     private String name;
     private Integer age;
+    private String email;
 
     @OneToOne(mappedBy = "customer")
     private User user;
