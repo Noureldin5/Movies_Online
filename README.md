@@ -138,3 +138,7 @@ src
     │       └── service
     └── resources
 
+```
+Run the application and open:
+👉 http://localhost:8080/swagger-ui.html
+```
