@@ -30,7 +30,11 @@ public class MovieMapperImpl implements MovieMapper {
         movieResponse.setPrice(movie.getPrice());
         movieResponse.setCreated_at(movie.getCreated_at());
         movieResponse.setAuthor_full_name(movie.getAuthor_full_name());
-        movieResponse.setType(movie.getType().getName());
+        if (movie.getType() != null) {
+            movieResponse.setType(movie.getType().getName());
+        } else {
+            movieResponse.setType("Unknown");
+        }
         return movieResponse;
     }
 }

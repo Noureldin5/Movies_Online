@@ -55,7 +55,6 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<MovieResponse> getAll(String s) {
-
         return movieMapper.toDtoS(movieRepository.findAll());
     }
 

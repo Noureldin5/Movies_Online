@@ -27,12 +27,6 @@ public class Movie {
     private Integer ageAccess;
     private Boolean exist = true;
 
-    public Movie(String title, String transcript, int created_at, Type type) {
-        this.title = title;
-        this.transcript = transcript;
-        this.created_at = created_at;
-        this.type = type;
-    }
 
     @ManyToOne()
     private Type type;
@@ -40,6 +34,12 @@ public class Movie {
     @ManyToOne()
     private Customer customer;
 
+    public Movie(String title, String transcript, int created_at, Type type) {
+        this.title = title;
+        this.transcript = transcript;
+        this.created_at = created_at;
+        this.type = type;
+    }
 
 
 }
