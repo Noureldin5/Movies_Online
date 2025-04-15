@@ -66,14 +66,14 @@ public class MovieServiceImpl implements MovieService {
         Movie movie = optionalMovie.get();
         movie.setExist(false);
         movieRepository.save(movie);
-        User user = userRepository.findByName("user").
+        User user = userRepository.findByUsername("user").
                 orElseThrow(() -> new NotFoundException("no user with name: user", HttpStatus.BAD_REQUEST));
         userRepository.save(user);
     }
 
     @Override
     public List<MovieResponse> getMoviesByCustomer(String string) {
-        Optional<Customer> customer = userRepository.findByName(string)
+        Optional<Customer> customer = userRepository.findByUsername(string)
                 .map(User::getCustomer);
         if (customer.isPresent()){
             List<Movie> movies = customer.get().getMovies();

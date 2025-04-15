@@ -14,7 +14,10 @@ public class User  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, unique = true)
-    private String name;
+    private String username;
+    private String password;
+    private String email;
+    private boolean emailVerified;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Customer customer;
