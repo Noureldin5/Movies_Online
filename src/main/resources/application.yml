@@ -10,8 +10,8 @@ spring:
       client:
         registration:
           google:
-            client-id: YOUR_GOOGLE_CLIENT_ID  # Replace with actual client ID
-            client-secret: YOUR_GOOGLE_CLIENT_SECRET  # Replace with actual secret
+            client-id: YOUR_GOOGLE_CLIENT_ID
+            client-secret: YOUR_GOOGLE_CLIENT_SECRET
             redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
             scope:
               - email
@@ -24,8 +24,8 @@ spring:
               - email
               - public_profile
           github:
-            client-id: YOUR_GITHUB_CLIENT_ID  # Replace with actual client ID
-            client-secret: YOUR_GITHUB_CLIENT_SECRET  # Replace with actual secret
+            client-id: YOUR_GITHUB_CLIENT_ID
+            client-secret: YOUR_GITHUB_CLIENT_SECRET
             redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
             scope:
               - user:email
