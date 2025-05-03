@@ -31,7 +31,13 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void register(UserRegisterRequest userRegisterRequest) {
-        // Existing implementation
+        User user = new User();
+        user.setUsername(userRegisterRequest.getUsername());
+        user.setPassword(encoder.encode(userRegisterRequest.getPassword()));
+        user.setEmail(userRegisterRequest.getEmail());
+        user.setEmailVerified(false);
+        userRepository.save(user);
+
     }
 
     @Override

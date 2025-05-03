@@ -1,6 +1,7 @@
 package org.example.midterm.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.midterm.dto.User.UserRegisterRequest;
 import org.example.midterm.dto.auth.AuthLoginRequest;
 import org.example.midterm.dto.auth.AuthResponse;
 import org.example.midterm.dto.auth.TokenRefreshRequest;
@@ -22,5 +23,10 @@ public class AuthController {
     @PostMapping("/refreshtoken")
     public ResponseEntity<AuthResponse> refreshToken(@RequestBody TokenRefreshRequest request) {
         return ResponseEntity.ok(authService.refreshToken(request.getRefreshToken()));
+    }
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody UserRegisterRequest userRegisterRequest) {
+        authService.register(userRegisterRequest);
+        return ResponseEntity.ok("User registered successfully");
     }
 }
