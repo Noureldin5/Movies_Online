@@ -1,9 +1,9 @@
 package org.example.midterm.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.midterm.config.JwtService;
 import org.example.midterm.dto.auth.AuthLoginRequest;
 import org.example.midterm.dto.auth.AuthResponse;
+import org.example.midterm.dto.auth.TokenRefreshRequest;
 import org.example.midterm.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +15,12 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public AuthResponse login(AuthLoginRequest authLoginRequest){
+    public AuthResponse login(@RequestBody AuthLoginRequest authLoginRequest) {
         return authService.login(authLoginRequest);
     }
-
+    
+    @PostMapping("/refreshtoken")
+    public ResponseEntity<AuthResponse> refreshToken(@RequestBody TokenRefreshRequest request) {
+        return ResponseEntity.ok(authService.refreshToken(request.getRefreshToken()));
+    }
 }
-

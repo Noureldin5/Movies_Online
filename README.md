@@ -1,71 +1,120 @@
-# Movie Management System
+
+# Movies Online Platform
 
 ## Overview
 
-The Movie Management System is a Spring Boot application that allows users to manage movies, including adding, buying, and retrieving movie details. The application uses Hibernate Validator for data validation and integrates with a PostgreSQL database.
+The Movies Online Platform is a comprehensive Spring Boot application that allows users to manage movies, including adding, buying, and retrieving movie details. The application features robust authentication with JWT tokens, OAuth2 integration with multiple providers, and email verification for user registration.
 
 ## Features
 
+- User authentication and authorization with JWT
+- OAuth2 integration with Google, Facebook, and GitHub
+- Email verification for user registration
 - Add new movies
 - Buy movies
 - Retrieve all movies
 - Retrieve movies by customer
+- User profile management
 
 ## Technologies Used
 
-- Java
-- Spring Boot
-- Hibernate Validator
+- Java 23
+- Spring Boot 3.4
+- Spring Security with JWT
+- OAuth2 for social login
+- Spring Mail for email services
+- Hibernate/JPA
 - Maven
-- PostgreSQL
-- H2 Database (for development)
-- JUnit 5
-- Mockito
+- PostgreSQL (Production)
+- H2 Database (Development)
+- JUnit 5 & Mockito
 - Swagger/OpenAPI
 
 ## Prerequisites
 
 - Java 23 or higher
 - Maven 3.6.0 or higher
-- PostgreSQL 13 or higher
+- PostgreSQL 13 or higher (for production)
+- Gmail account (for email services)
 
 ## Getting Started
 
 ### Clone the Repository
+```
+bash git clone [https://github.com/Noureldin5/movie-management-system.git](https://github.com/Noureldin5/movie-management-system.git) cd movie-management-system
+``` 
 
-```bash
-git clone https://github.com/Noureldin5/movie-management-system.git
-cd movie-management-system
+### Build and Run
 ```
-```bash
-mvn clean install
-mvn spring-boot:run
-```
-```
-Configure the Database
-Development Profile (H2 Database)
-The application is configured to use an in-memory H2 database for the development profile. No additional setup is required.
+bash mvn clean install mvn spring-boot:run
+``` 
 
+### Configuration
 
-Production Profile (PostgreSQL)
-Create a PostgreSQL database named moviesdb and update the application.yml file with your database credentials.
+#### Database Configuration
 
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/moviesdb
-    driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: 1234
-  jpa:
-    hibernate:
-      ddl-auto: update
+**Development Profile (H2 Database)**
+- The application is configured to use an in-memory H2 database for the development profile.
+- No additional setup is required.
+
+**Production Profile (PostgreSQL)**
+- Create a PostgreSQL database named `moviesdb`
+- Update the database credentials in `application.yml`
+
+#### Email Configuration
+
+The application uses Gmail SMTP for sending verification emails:
+```
+yaml spring: mail: host: smtp.gmail.com port: 587 username: your-email@gmail.com password: your-app-password properties: mail: smtp: auth: true starttls: enable: true
+``` 
+
+**Note:** For Gmail, you need to use an app password. Create one at [Google Account Security](https://myaccount.google.com/security).
+
+#### OAuth2 Configuration
+
+Configure your OAuth2 credentials for social login:
+```
+yaml spring: security: oauth2: client: registration: google: client-id: YOUR_GOOGLE_CLIENT_ID client-secret: YOUR_GOOGLE_CLIENT_SECRET facebook: client-id: YOUR_FACEBOOK_CLIENT_ID client-secret: YOUR_FACEBOOK_CLIENT_SECRET github: client-id: YOUR_GITHUB_CLIENT_ID client-secret: YOUR_GITHUB_CLIENT_SECRET
+``` 
+
+## API Endpoints
+
+### Authentication
+
+**Register a User**
+- URL: `/api/auth/register`
+- Method: POST
+- Request Body:
+```
+json { "email": "user@example.com", "password": "password123", "firstName": "John", "lastName": "Doe" }
+``` 
+
+**Login**
+- URL: `/api/auth/login`
+- Method: POST
+- Request Body:
+```json
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
 ```
 ```
-API Endpoints
-Add a Movie
-URL: /movie/add
-Method: POST
-Request Body:
+**Refresh Token**
+- URL: `/api/auth/refresh`
+- Method: POST
+- Request Body:
+``` json
+{
+  "refreshToken": "your-refresh-token"
+}
+```
+### Movies
+**Add a Movie**
+- URL: `/movie/add`
+- Method: POST
+- Request Body:
+``` json
 {
   "title": "Inception",
   "author_full_name": "Christopher Nolan",
@@ -82,12 +131,11 @@ Request Body:
   }
 }
 ```
-
-```
-Buy a Movie
-URL: /movie/buy
-Method: POST
-Request Body:
+**Buy a Movie**
+- URL: `/movie/buy`
+- Method: POST
+- Request Body:
+``` json
 {
   "title": "Inception",
   "customer": {
@@ -95,29 +143,22 @@ Request Body:
   }
 }
 ```
-
-```bash
-
-```
-Running Tests
-
-Unit Tests
-```bash
+## Running Tests
+### Unit Tests
+``` bash
 mvn test
 ```
-```
-Integration Tests
-```
-```bash
+### Integration Tests
+``` bash
 mvn verify
 ```
-```
-Project Structure
-
+## Project Structure
+``` 
 src
 ├── main
 │   ├── java
 │   │   └── org.example.midterm
+│   │       ├── config
 │   │       ├── controller
 │   │       ├── dto
 │   │       ├── entities
@@ -125,9 +166,12 @@ src
 │   │       ├── mapper
 │   │       ├── repositories
 │   │       ├── service
-│   │       └── MovieManagementApplication.java
+│   │       │   └── impl
+│   │       └── MoviesonlineApplication.java
 │   └── resources
 │       ├── application.yml
+│       ├── static
+│       └── templates
 └── test
     ├── java
     │   └── org.example.midterm
@@ -136,9 +180,11 @@ src
     │       ├── integration
     │       ├── mapper
     │       └── service
-    └── resources
-
 ```
-Run the application and open:
-👉 http://localhost:8080/swagger-ui.html
-```
+## API Documentation
+Run the application and open: 👉 [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+## Security Notes
+- For production environments, always use environment variables or a secure vault for sensitive information
+- JWT tokens are configured to expire after 15 minutes (access token) and 24 hours (refresh token)
+- Password storage uses secure hashing algorithms
+- Email verification is required for new accounts
