@@ -9,6 +9,7 @@ public class UserRegisterRequest {
 
     private String email;
     private String username;
+    private String name;
     private String password;
     private boolean emailVerified;
 

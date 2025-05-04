@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
                 .orElseGet(() -> {
                     User user = new User();
                     user.setEmail(email);
+                    user.setName(name);
                     user.setUsername(email);
                     user.setEmailVerified(true); // Social login emails are verified
 
